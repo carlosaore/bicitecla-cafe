@@ -1,18 +1,15 @@
 import styled from 'styled-components';
 
 const InfoWrapper = styled.div`
-    height: 100%;
+    min-height : ${window.innerHeight}px;
     max-width: 90vw;
     width: 640px;
-    padding: 10% 5%;
-    margin : auto 0;
+    padding : 10% 0;
     display : flex;
-    flex-wrap : wrap;
+    flex-direction: column;
     justify-content: center;
-    align-content : center;
 
     label {
-        font-size: small;
         color: grey;
     }
 
@@ -41,15 +38,16 @@ const InfoWrapper = styled.div`
     }
 
     input[type=submit] {
-        width: 100%;
         background-color: #3DA35D;
         color: white;
-        padding: 14px 20px;
+        padding: 0px 24px;
         margin: 8px 0;
+        line-height: 36px;
         border: none;
         border-radius: 4px;
         box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
-        font-weight: bold;
+        font-weight: 500;
+        text-align: center;
         outline: none;
         cursor: pointer;
         transition: box-shadow 0.2s;

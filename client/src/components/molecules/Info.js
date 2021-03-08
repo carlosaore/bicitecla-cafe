@@ -14,15 +14,16 @@ const Info = () => {
 	
 	return (
 		<InfoSection>
-			<InfoWrapper>
+			<InfoWrapper id="info-section">
+				<h2>Registro</h2>
 				<p>
 					Por medio de este formulario su negocio estará registrado para que solicite nuestros servicios y reciba de inmediato uno de nuestros bici mensajeros a la puerta de su domicilio.
 				</p>
 				<br/>
 				<form onSubmit={handleSubmit(onSubmit)}>
 					<label htmlFor="nombre">
-						Nombre del Negocio o Empresa:
-						{errors.nombre && <Span>*</Span>}
+						Nombre del Negocio o Empresa
+						{errors.nombre && <Span> *</Span>}
 					</label>
 					<input
 						name="nombre"
@@ -30,49 +31,54 @@ const Info = () => {
 						type="text"
 						ref={register({ required: true})}
 						aria-invalid={errors.nombre ? "true" : "false"}
+						placeholder="Tu respuesta"
 					/>
 
 					<label htmlFor="direccion">
-						Dirección exacta:
-						{errors.nombre && <Span>*</Span>}
+						Dirección exacta
+						{errors.nombre && <Span> *</Span>}
 					</label>
 					<textarea
 						name="direccion"
 						id="direccion"
 						ref={register({ required: true})}
+						placeholder="Tu respuesta"
 					>
 					</textarea>
 
 					<label htmlFor="email">
-						Correo electrónico:
-						{errors.nombre && <Span>*</Span>}
+						Correo electrónico
+						{errors.nombre && <Span> *</Span>}
 					</label>
 					<input
 						name="email"
 						id="email"
 						type="email"
 						ref={register({ required: true })}
+						placeholder="Tu respuesta"
 					/>
 
 					<label htmlFor="telefono">
-						Teléfono:
-						{errors.nombre && <Span>*</Span>}
+						Teléfono
+						{errors.nombre && <Span> *</Span>}
 					</label>
 					<input
 						name="telefono"
 						type="tel"
 						ref={register({ required: true })}
+						placeholder="Tu respuesta"
 					/>
 					
 					<label htmlFor="persona">
-						Persona encargada de los envíos:
-						{errors.nombre && <Span>*</Span>}
+						Persona encargada de los envíos
+						{errors.nombre && <Span> *</Span>}
 					</label>
 					<input
 						name="persona"
 						id="persona"
 						type="text"
 						ref={register({ required: true })}
+						placeholder="Tu respuesta"
 					/>
 
 					<input

@@ -1,15 +1,15 @@
-import HeroImg from "./components/atoms/HeroImg";
+import Landing from "./components/molecules/Landing";
 import Info from "./components/molecules/Info";
+import Footer from "./components/molecules/Footer";
+
 
 
 function App() {
 	return (
 		<>
-			<HeroImg url="./images/pexels-ryutaro-tsukata-6249462.jpg">
-			</HeroImg>
+			<Landing />
 			<Info />
-			<HeroImg url="./images/pexels-flo-maderebner-623919.jpg">
-			</HeroImg>
+			<Footer />
 		</>
 	);
 }
