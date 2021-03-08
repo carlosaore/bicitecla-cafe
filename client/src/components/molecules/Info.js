@@ -9,7 +9,7 @@ const Info = () => {
 	const onSubmit = data => {
 		console.log(data);
 		reset();
-		alert("mensaje enviado")
+		alert("Página en construcción")
 	}
 	
 	return (

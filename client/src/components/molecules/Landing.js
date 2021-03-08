@@ -36,7 +36,10 @@ const Landing = () => (
             </H3>
             <H3>
                 Nuestro arancel desde $2.00 hasta $5.00 le garantiza la entrega de su paquete en corto tiempo y la seguridad de su producto. 
-            </H3>    
+            </H3>
+            <p>
+                Página en construcción
+            </p>
         </TextWrapper>
         <DataScroll
             to="#info-section"
