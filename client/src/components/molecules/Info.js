@@ -3,15 +3,22 @@ import InfoWrapper from '../atoms/InfoWrapper';
 import Span from '../atoms/errorSpan';
 import { useForm } from 'react-hook-form';
 import InfoSection from '../atoms/InfoSection';
+const axios = require('axios');
 
 const Info = () => {
 	const { register, handleSubmit, reset, errors } = useForm();
 	const onSubmit = data => {
-		console.log(data);
-		reset();
-		alert("Página en construcción")
+		axios.post('/api',{data})
+		.then((response) => {
+            if (response.status === 200) {
+                alert("Registro exitoso. Favor revise su email.");  //replace with https://sweetalert.js.org/ in next MVP
+                reset();
+            } else if (response.status !== 200) {
+                alert("Algo salio mal. Vuelva a intentarlo o contactenos en bicitecla@gmail.com");
+            }
+		})
 	}
-	
+
 	return (
 		<InfoSection>
 			<InfoWrapper id="info-section">

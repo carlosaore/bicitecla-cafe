@@ -28,7 +28,7 @@ const H3 = styled.h3`
 const Landing = () => (
     <HeroImg url="./images/pexels-ryutaro-tsukata-6249462.jpg">
         <LogoWrapper>
-            <img className="logo" src="./images/logo btc.svg" alt="logo"/>
+            <img className="logo" src="./images/logobtc.svg" alt="logo"/>
         </LogoWrapper>
         <TextWrapper>
             <H3>
