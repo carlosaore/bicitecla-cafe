@@ -1,4 +1,5 @@
-import React from 'react';
+import swal from 'sweetalert';
+import React, { useState } from 'react';
 import InfoWrapper from '../atoms/InfoWrapper';
 import Span from '../atoms/errorSpan';
 import { useForm } from 'react-hook-form';
@@ -6,17 +7,40 @@ import InfoSection from '../atoms/InfoSection';
 const axios = require('axios');
 
 const Info = () => {
+
+	const [status, setStatus] = useState("Enviar");
+
 	const { register, handleSubmit, reset, errors } = useForm();
 	const onSubmit = data => {
-		axios.post('/api',{data})
+		setStatus("······");
+		axios.post('/api', {data})
 		.then((response) => {
             if (response.status === 200) {
-                alert("Registro exitoso. Favor revise su email.");  //replace with https://sweetalert.js.org/ in next MVP
+                swal({
+					title: "¡Muchas gracias!",
+					text: "🚴🏽‍♀️ Registro exitoso 🚴🏽‍♀️",
+					icon: "success",
+				});
                 reset();
+				setStatus("Enviar");
             } else if (response.status !== 200) {
-                alert("Algo salio mal. Vuelva a intentarlo o contactenos en bicitecla@gmail.com");
+                swal({
+					title: "Error",
+					text: "🚳 Algo salio mal. Contactanos en biciteclacafe@gmail.com para mayor asistencia. 🚳",
+					icon: "error",
+				});
+				setStatus("Enviar");
             }
 		})
+		.catch((error) => {
+			console.error(error);
+			setStatus("Enviar");
+			swal({
+				title: "Error",
+				text: "🚳 Algo salio mal. Contactanos en biciteclacafe@gmail.com para mayor asistencia. 🚳",
+				icon: "error",
+			});
+		});
 	}
 
 	return (
@@ -36,60 +60,61 @@ const Info = () => {
 						name="nombre"
 						id="nombre"
 						type="text"
-						ref={register({ required: true})}
+						ref={register({ required: true })}
 						aria-invalid={errors.nombre ? "true" : "false"}
-						placeholder="Tu respuesta"
+						placeholder="..."
 					/>
 
 					<label htmlFor="direccion">
 						Dirección exacta
-						{errors.nombre && <Span> *</Span>}
+						{errors.direccion && <Span> *</Span>}
 					</label>
 					<textarea
 						name="direccion"
 						id="direccion"
-						ref={register({ required: true})}
-						placeholder="Tu respuesta"
+						ref={register({ required: true })}
+						placeholder="..."
 					>
 					</textarea>
 
 					<label htmlFor="email">
 						Correo electrónico
-						{errors.nombre && <Span> *</Span>}
+						{errors.email && <Span> *</Span>}
 					</label>
 					<input
 						name="email"
 						id="email"
 						type="email"
 						ref={register({ required: true })}
-						placeholder="Tu respuesta"
+						placeholder="..."
 					/>
 
 					<label htmlFor="telefono">
 						Teléfono
-						{errors.nombre && <Span> *</Span>}
+						{errors.telefono && <Span> *</Span>}
 					</label>
 					<input
 						name="telefono"
+						id="telefono"
 						type="tel"
 						ref={register({ required: true })}
-						placeholder="Tu respuesta"
+						placeholder="..."
 					/>
 					
 					<label htmlFor="persona">
 						Persona encargada de los envíos
-						{errors.nombre && <Span> *</Span>}
+						{errors.persona && <Span> *</Span>}
 					</label>
 					<input
 						name="persona"
 						id="persona"
 						type="text"
 						ref={register({ required: true })}
-						placeholder="Tu respuesta"
+						placeholder="..."
 					/>
-
 					<input
 						type="submit"
+						value={status}
 					/>
 				</form>
 			</InfoWrapper>

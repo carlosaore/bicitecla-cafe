@@ -12,6 +12,14 @@ const GlobalStyle = createGlobalStyle`
 	}
 
 	textarea, input, button, select { font-family: inherit; font-size: inherit; }
+
+	.swal-button--confirm {
+		background-color: #3DA35D;
+	}
+
+	.swal-button:not([disabled]):hover{
+		background-color: #379555;
+	}
 `;
  
 export default GlobalStyle;
