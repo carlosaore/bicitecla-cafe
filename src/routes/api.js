@@ -1,19 +1,15 @@
 const express = require('express');
 const app = express();
-const router = require("./routes/api");
-//const cors = require("cors");
-//const nodemailer = require("nodemailer");
-//require('dotenv').config();
+const router = express.Router();
+const cors = require("cors");
+const nodemailer = require("nodemailer");
+const { default: axios } = require('axios');
+require('dotenv').config();
 
-//app.use(cors());
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use("/api", router);
 
-app.get('/', function(req, res) {
-    res.status(200).send("API running")
-});
-/*
 const contactEmail = nodemailer.createTransport({
     service: 'gmail',
     auth: {
@@ -22,7 +18,7 @@ const contactEmail = nodemailer.createTransport({
     },
 });
 
-  contactEmail.verify((error) => {
+contactEmail.verify((error) => {
     if (error) {
       console.log(error);
     } else {
@@ -30,7 +26,48 @@ const contactEmail = nodemailer.createTransport({
     }
 });
 
-router.post('/api', (req, res) => {
+router.use((req, res, next) => {
+    const hora = new Date();
+    axios.post(process.env.URL, {
+        ...req.body.data,
+        hora : hora
+    });
+    next();
+});
+
+router.use((req, res, next) => {
+    const hora = new Date();
+    const nombre = req.body.data.nombre;
+    const email = req.body.data.email;
+    const direccion = req.body.data.direccion;
+    const telefono = req.body.data.telefono;
+    const persona = req.body.data.persona;
+    const mail = {
+        from: "Bici Tecla Café",
+        to: "biciteclacafe@gmail.com",
+        subject: `Nuevo registro a Bici Tecla Café`,
+        html:   `<p>Informacion proporcionada:</p>
+                <ul>
+                <li>Nombre: ${nombre}</li>
+                <li>Email: ${email}</li>
+                <li>Dirección: ${direccion}</li>
+                <li>Teléfono: ${telefono}</li>
+                <li>Encargado: ${persona}</li>
+                <li>Hora: ${hora}</li>
+                </ul>
+                `,
+    };
+    contactEmail.sendMail(mail, (error) => {
+        if (error) {
+            res.status().json({ status: "ERROR" });
+            return;
+        } else {
+            next();
+        }
+    });
+});
+
+router.post('/', (req, res) => {
     const nombre = req.body.data.nombre;
     const email = req.body.data.email;
     const direccion = req.body.data.direccion;
@@ -63,5 +100,5 @@ router.post('/api', (req, res) => {
         }
     });
 });
-*/
-module.exports = app;
+
+module.exports = router
